@@ -1,30 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Companion AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose Your Companion</title>
   <style>
-    body { font-family: sans-serif; text-align: center; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: #f9f9fb;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
     .card {
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
+      border-radius: 12px;
       padding: 15px;
       margin: 10px;
       display: inline-block;
-      width: 200px;
+      width: 220px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
     }
-    img { border-radius: 8px; }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    img {
+      border-radius: 10px;
+      width: 100%;
+      max-width: 150px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #4f46e5;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      background: #3730a3;
+    }
   </style>
 </head>
 <body>
   <h1>Choose Your Companion</h1>
-  <div id="companion-list"></div>
+  <div id="container"></div>
 
   <script src="companions.js"></script>
   <script>
-    const container = document.getElementById("companion-list");
+    const container = document.getElementById("container");
+
     companions.forEach(c => {
       container.innerHTML += `
         <div class="card">
-          <img src="${c.image}" width="100"><br>
+          <img src="${c.image}" alt="${c.name}">
           <h3>${c.name}</h3>
           <p>${c.description}</p>
           <a href="chat.html?id=${c.id}">Chat</a>
