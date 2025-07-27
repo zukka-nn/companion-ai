@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat with Companion</title>
+</head>
+<body>
+  <div id="chat-box"></div>
+  <input id="userInput" placeholder="Type your message..." />
+  <button onclick="send()">Send</button>
+
+  <script src="companions.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const companion = companions.find(c => c.id === params.get("id"));
+    document.getElementById("chat-box").innerHTML = `<h2>Chatting with ${companion.name}</h2>`;
+
+    function send() {
+      const input = document.getElementById("userInput");
+      const userText = input.value;
+      input.value = "";
+
+      const reply = fakeReply();
+
+      document.getElementById("chat-box").innerHTML += `
+        <p><b>You:</b> ${userText}</p>
+        <p><b>${companion.name}:</b> ${reply}</p>
+      `;
+    }
+
+    function fakeReply() {
+      const replies = [
+        "That’s so interesting!",
+        "I love hearing about that.",
+        "Tell me more, please~",
+        "You're really fun to talk to.",
+        "Aww, that’s sweet!"
+      ];
+      return replies[Math.floor(Math.random() * replies.length)];
+    }
+  </script>
+</body>
+</html>
